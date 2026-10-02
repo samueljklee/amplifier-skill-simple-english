@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "provenance": "synthetic",
+  "purpose": "Meaning-preservation regression prompts for separate behavioral review; static tests validate shape only.",
+  "cases": [
+    {
+      "id": "recommendation_and_possibility",
+      "mode": "pragmatic",
+      "task": "rewrite",
+      "context": "Rewrite for a maintainer. Preserve the strength of each statement.",
+      "input": "You should review the cache policy. A cache miss may delay a response. Editors may change the policy after approval.",
+      "expected_invariants": [
+        "Review remains a recommendation, not a requirement or established fact.",
+        "A delay remains possible rather than certain.",
+        "Editors' permission remains conditional on approval; it is not mere ability.",
+        "Meaningful should and may can remain."
+      ],
+      "protected_spans": []
+    },
+    {
+      "id": "unknown_cause_and_approximation",
+      "mode": "pragmatic",
+      "task": "rewrite",
+      "context": "Rewrite an error summary using only the supplied evidence.",
+      "input": "The connection failed. The cause is unknown. About 10 requests may be affected.",
+      "expected_invariants": [
+        "The cause remains unknown.",
+        "No password, endpoint, port, duration, percentage, or recovery step is invented.",
+        "About 10 remains approximate and impact remains uncertain."
+      ],
+      "protected_spans": []
+    },
+    {
+      "id": "global_state_not_personal_action",
+      "mode": "pragmatic",
+      "task": "rewrite",
+      "context": "Make this status clear without narrowing its scope.",
+      "input": "Files are unchanged.",
+      "expected_invariants": [
+        "The state of all referenced files remains unchanged.",
+        "Do not replace the global state with I changed no files.",
+        "Do not invent an actor, cause, or time."
+      ],
+      "protected_spans": []
+    },
+    {
+      "id": "ambiguous_approval_gate",
+      "mode": "pragmatic",
+      "task": "rewrite",
+      "context": "Rewrite for an operator. This task authorizes editing only.",
+      "input": "The note records approval to review the plan. Approval to deploy is unclear.",
+      "expected_invariants": [
+        "Recorded approval concerns review only, not deployment.",
+        "Deployment authority remains unclear.",
+        "Do not execute work, claim approval was applied, or invent a resolution.",
+        "A clarification or an explicit ambiguity label is acceptable."
+      ],
+      "protected_spans": []
+    },
+    {
+      "id": "conditions_and_passage_roles",
+      "mode": "pragmatic",
+      "task": "rewrite",
+      "context": "First sentence is descriptive. Second instructs the reader. Third is an assistant-owned plan.",
+      "input": "The worker retries if the connection closes. Restart the worker if the queue is empty. I will inspect the log if the retry fails.",
+      "expected_invariants": [
+        "The descriptive trailing condition may remain.",
+        "The reader instruction becomes If the queue is empty, restart the worker.",
+        "The assistant-owned plan stays a description rather than a user command.",
+        "Each condition remains attached to its original action."
+      ],
+      "protected_spans": []
+    },
+    {
+      "id": "distinct_concepts_and_operations",
+      "mode": "pragmatic",
+      "task": "rewrite",
+      "context": "Make a guide clearer without merging its glossary concepts.",
+      "input": "The settings panel changes an option in the configuration file. Validation checks input; execution starts the recipe. Authentication identifies a user; authorization grants access.",
+      "expected_invariants": [
+        "Panel, option, and configuration file remain distinct objects.",
+        "Validation and execution remain distinct operations.",
+        "Authentication and authorization remain distinct operations.",
+        "Do not force operate recipe or replace all operations with one verb."
+      ],
+      "protected_spans": []
+    },
+    {
+      "id": "protected_content_unchanged",
+      "mode": "pragmatic",
+      "task": "rewrite",
+      "context": "Simplify prose only; the commands, identifiers, quotation, name, and diagram are exact.",
+      "input": "Prior to starting Example Worker, read `settings.retry_count` in `config/example.yaml`. Use `worker run --config config/example.yaml`. Keep the quote \"retry might fail\".\n\n```python\nmay_retry = True\n```\n\n```text\nclient -> queue -> worker\n```",
+      "expected_invariants": [
+        "Every protected span stays byte for byte unchanged.",
+        "Do not rename Example Worker, edit code, or normalize quoted modals.",
+        "Do not change flags, paths, identifiers, or the diagram."
+      ],
+      "protected_spans": [
+        "Example Worker",
+        "`settings.retry_count`",
+        "`config/example.yaml`",
+        "`worker run --config config/example.yaml`",
+        "\"retry might fail\"",
+        "```python\nmay_retry = True\n```",
+        "```text\nclient -> queue -> worker\n```"
+      ]
+    },
+    {
+      "id": "saved_not_installed_and_reported_evidence",
+      "mode": "pragmatic",
+      "task": "rewrite",
+      "context": "Rewrite a status update without implying delivery or independent validation.",
+      "input": "The patch was saved but not installed. The agent reports that a local test passed. No independent check occurred.",
+      "expected_invariants": [
+        "Saved remains distinct from installed, active, or applied.",
+        "The passing test remains reported evidence, not independently established success.",
+        "The absence of independent checking remains explicit."
+      ],
+      "protected_spans": []
+    },
+    {
+      "id": "aim_and_hypothesis_not_fact",
+      "mode": "pragmatic",
+      "task": "rewrite",
+      "context": "Preserve intent and a conditional forecast in a design note.",
+      "input": "The tool aims to reduce delays. If the trial succeeds, the team expects that the tool would help operators.",
+      "expected_invariants": [
+        "The aim is not changed into measured or implemented behavior.",
+        "The team's expectation remains a forecast, not an established result.",
+        "The trial-success condition remains attached to the expected benefit.",
+        "No causal certainty or measurement is invented."
+      ],
+      "protected_spans": []
+    },
+    {
+      "id": "strict_source_unavailable",
+      "mode": "strict",
+      "task": "review",
+      "context": "The official primary text and dictionary are unavailable and cannot be retrieved in this review.",
+      "input": "Check ASD-STE100 compliance: You should review the file. The cause may be unknown.",
+      "expected_invariants": [
+        "Give only a bounded clarity review with an explicit source limitation.",
+        "Name unverified strict checks, including vocabulary and verb or modal rules.",
+        "Do not guess rule IDs or dictionary approvals.",
+        "Do not claim compliance, a full audit, certification, or that recommendations are requirements."
+      ],
+      "protected_spans": []
+    }
+  ]
+}
